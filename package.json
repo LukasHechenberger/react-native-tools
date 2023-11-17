@@ -32,5 +32,6 @@
     "plist": "^3.1.0",
     "typanion": "^3.14.0"
   },
+  "types": "./out/index.d.ts",
   "packageManager": "pnpm@8.10.2"
 }
