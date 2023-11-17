@@ -58,7 +58,7 @@ export async function updateXcodeBuildNumber(
   const infoPlists = options.infoPlists || (await findPlistFiles());
 
   for (const path of infoPlists) {
-    await updateInfoPlist(path, { CFBundleVersion: buildNumber });
+    await updateInfoPlist(path, { CFBundleVersion: `${buildNumber}` });
   }
 
   // Update project.pbxproj
