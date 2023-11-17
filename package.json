@@ -1,5 +1,5 @@
 {
-  "name": "react-native-versioning",
+  "name": "react-native-bump",
   "version": "0.0.0",
   "description": "Update the version of your React Native app",
   "main": "./out/index.cjs",
@@ -10,7 +10,7 @@
     "release": "npm run -s build && changeset publish"
   },
   "bin": {
-    "react-native-version": "./out/bin.cjs"
+    "react-native-bump": "./out/bin.cjs"
   },
   "keywords": [],
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",

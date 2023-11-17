@@ -3,16 +3,16 @@
 ## Command Line Interface
 
 ```
-react-native-versioning - 0.0.0
+react-native-bump - 0.0.0
 
-  $ npx react-native-versioning <command>
+  $ npx react-native-bump <command>
 
 General commands
 
-  npx react-native-versioning update-build <--to #0>
+  npx react-native-bump update-build <--to #0>
     Update the build number of your app
 
-  npx react-native-versioning update-version <--to #0>
+  npx react-native-bump update-version <--to #0>
     Update the version of your app
 
 You can also print more details about any of these commands by calling them with
