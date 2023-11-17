@@ -1,5 +1,11 @@
 # react-native-bump
 
+## 0.2.0
+
+### Minor Changes
+
+- cddd262: Add `version --predict` flag to update to the next version based on changesets
+
 ## 0.1.0
 
 ### Minor Changes
