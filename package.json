@@ -1,5 +1,5 @@
 {
-  "name": "@lhechenberger/react-native-version",
+  "name": "react-native-versioning",
   "version": "0.0.0",
   "description": "Update the version of your React Native app",
   "main": "./out/index.cjs",
