@@ -27,5 +27,6 @@
     "fast-glob": "^3.3.2",
     "plist": "^3.1.0",
     "typanion": "^3.14.0"
-  }
+  },
+  "packageManager": "pnpm@8.10.2"
 }
