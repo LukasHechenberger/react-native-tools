@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "npm run -s build && changesets publish"
   },
   "bin": {
     "react-native-version": "./out/bin.cjs"
@@ -15,6 +16,7 @@
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "license": "MIT",
   "devDependencies": {
+    "@changesets/cli": "^2.26.2",
     "@types/node": "^20.9.1",
     "@types/plist": "^3.0.5",
     "tsup": "^7.3.0",
