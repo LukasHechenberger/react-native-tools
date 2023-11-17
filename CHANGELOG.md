@@ -1,5 +1,12 @@
 # react-native-bump
 
+## 0.1.0
+
+### Minor Changes
+
+- db0ccc0: Add `update-version --increment-build` flag
+- 0036a89: Add `update-build --increment` flag
+
 ## 0.0.2
 
 ### Patch Changes
