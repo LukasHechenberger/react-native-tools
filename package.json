@@ -14,7 +14,7 @@
     "release": "npm run -s build && changeset publish"
   },
   "bin": {
-    "react-native-bump": "./out/bin.cjs"
+    "react-native-bump": "./out/bin.mjs"
   },
   "keywords": [],
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
