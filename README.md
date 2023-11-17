@@ -3,13 +3,13 @@
 ## Command Line Interface
 
 ```
-react-native-bump - 0.0.0
+━━━ react-native-bump ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   $ npx react-native-bump <command>
 
-General commands
+━━━ General commands ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  npx react-native-bump update-build <--to #0>
+  npx react-native-bump update-build [--to #0] [--increment]
     Update the build number of your app
 
   npx react-native-bump update-version <--to #0>

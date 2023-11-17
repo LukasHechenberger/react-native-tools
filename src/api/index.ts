@@ -2,8 +2,14 @@ import {
   updateAndroidVersion,
   type AndroidProjectOptions,
   updateAndroidBuildNumber,
+  getAndroidBuildNumber,
 } from './android';
-import { updateXcodeBuildNumber, updateXcodeVersion, type XcodeProjectOptions } from './xcode';
+import {
+  getXcodeBuildBumber,
+  updateXcodeBuildNumber,
+  updateXcodeVersion,
+  type XcodeProjectOptions,
+} from './xcode';
 
 export type CombinedOptions = XcodeProjectOptions & AndroidProjectOptions;
 
@@ -17,4 +23,14 @@ export async function updateBuildNumber(buildNumber: number, options?: CombinedO
   await updateAndroidBuildNumber(buildNumber, options);
 }
 
-export { updateAndroidVersion, updateXcodeVersion };
+export async function getBuildNumber(options?: CombinedOptions) {
+  const versions = await Promise.all([
+    getXcodeBuildBumber(options),
+    getAndroidBuildNumber(options),
+  ]);
+
+  return versions.reduce((a, b) => Math.max(a, b));
+}
+
+export * from './xcode';
+export * from './android';
