@@ -1,5 +1,11 @@
 # react-native-bump
 
+## 0.2.2
+
+### Patch Changes
+
+- 9940b07: Use esm bin entry
+
 ## 0.2.1
 
 ### Patch Changes
