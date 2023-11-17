@@ -1,0 +1,29 @@
+{
+  "name": "@lhechenberger/react-native-version",
+  "version": "0.0.0",
+  "description": "Update the version of your React Native app",
+  "main": "./out/index.cjs",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "react-native-version": "./out/bin.cjs"
+  },
+  "keywords": [],
+  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.9.1",
+    "@types/plist": "^3.0.5",
+    "tsup": "^7.3.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "clipanion": "4.0.0-rc.2",
+    "fast-glob": "^3.3.2",
+    "plist": "^3.1.0",
+    "typanion": "^3.14.0"
+  }
+}
