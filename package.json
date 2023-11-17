@@ -1,8 +1,12 @@
 {
   "name": "react-native-bump",
   "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Update the version of your React Native app",
   "main": "./out/index.cjs",
+  "module": "./out/index.mjs",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
