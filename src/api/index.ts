@@ -32,5 +32,11 @@ export async function getBuildNumber(options?: CombinedOptions) {
   return versions.reduce((a, b) => Math.max(a, b));
 }
 
+export async function incrementBuildNumber(options?: CombinedOptions) {
+  const buildNumber = await getBuildNumber(options);
+
+  return updateBuildNumber(buildNumber + 1, options);
+}
+
 export * from './xcode';
 export * from './android';

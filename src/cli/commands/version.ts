@@ -1,5 +1,5 @@
 import { Command, Option } from 'clipanion';
-import { updateVersion } from '../..';
+import { incrementBuildNumber, updateVersion } from '../..';
 
 const runningHelp = process.argv.some((arg) => arg === '--help' || arg === '-h');
 
@@ -15,7 +15,15 @@ export default class VersionCommand extends Command {
     required: true,
   });
 
+  private incrementBuildOption = Option.Boolean('--increment-build', false, {
+    description: 'Also increment the build number',
+  });
+
   async execute() {
     await updateVersion(this.versionOption);
+
+    if (this.incrementBuildOption) {
+      await incrementBuildNumber();
+    }
   }
 }
