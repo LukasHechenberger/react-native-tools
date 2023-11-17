@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "clipanion": "4.0.0-rc.2",
+    "execa": "^8.0.1",
     "fast-glob": "^3.3.2",
     "plist": "^3.1.0",
     "typanion": "^3.14.0"

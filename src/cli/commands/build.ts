@@ -3,7 +3,7 @@ import { isNumber } from 'typanion';
 import { getBuildNumber, updateBuildNumber } from '../..';
 
 export default class BuildNumberCommand extends Command {
-  static paths = [['update-build']];
+  static paths = [['build'], ['update-build']];
 
   static usage = {
     description: 'Update the build number of your app',
@@ -30,6 +30,7 @@ export default class BuildNumberCommand extends Command {
       buildNumber = (await getBuildNumber()) + 1;
     }
 
+    console.info(`Updating build number to ${buildNumber}`);
     await updateBuildNumber(buildNumber);
   }
 }
