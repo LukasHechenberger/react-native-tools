@@ -6,7 +6,7 @@ import { buildPlist, parsePlist } from '../lib/plist';
 import { updateFile } from '../lib/fs';
 
 const xcodePbxGlob = '**/*.xcodeproj/project.pbxproj';
-const xcodeInfoPlistGlob = ['**/Info.plist', '!**/Pods/**'];
+const xcodeInfoPlistGlob = ['**/Info.plist', '!**/Pods/**', '!**/build/**'];
 const xcodeCurrentVersionPattern = 'CURRENT_PROJECT_VERSION = ([0-9.]+)';
 
 export type XcodeProjectOptions = {
