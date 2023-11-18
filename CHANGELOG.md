@@ -1,5 +1,11 @@
 # react-native-bump
 
+## 0.2.3
+
+### Patch Changes
+
+- baf18ef: Do not attempt to update build Info.plist files
+
 ## 0.2.2
 
 ### Patch Changes
