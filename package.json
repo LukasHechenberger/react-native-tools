@@ -1,0 +1,13 @@
+{
+  "name": "@lhechenberger/react-native-tools",
+  "version": "0.0.0",
+  "description": "React Native Tools",
+  "dependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "pnpm run -r build && changeset publish"
+  },
+  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
+  "license": "MIT",
+  "packageManager": "pnpm@8.10.2"
+}
