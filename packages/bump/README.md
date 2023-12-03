@@ -1,4 +1,4 @@
-# react-native-versioning
+# react-native-bump
 
 ## Command Line Interface
 
