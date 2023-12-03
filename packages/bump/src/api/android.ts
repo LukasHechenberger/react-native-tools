@@ -12,19 +12,19 @@ export type AndroidProjectOptions = {
 
 export async function updateAndroidVersion(
   version: string,
-  { gradlePath = defaultGradlePath }: AndroidProjectOptions = {}
+  { gradlePath = defaultGradlePath }: AndroidProjectOptions = {},
 ) {
   await updateFile(gradlePath, (contents) =>
-    contents.replace(versionNameRegex, `versionName "${version}"`)
+    contents.replace(versionNameRegex, `versionName "${version}"`),
   );
 }
 
 export async function updateAndroidBuildNumber(
   buildNumber: number,
-  { gradlePath = defaultGradlePath }: AndroidProjectOptions = {}
+  { gradlePath = defaultGradlePath }: AndroidProjectOptions = {},
 ) {
   await updateFile(gradlePath, (contents) =>
-    contents.replace(versionCodeRegex, `versionCode ${buildNumber}`)
+    contents.replace(versionCodeRegex, `versionCode ${buildNumber}`),
   );
 }
 

@@ -50,14 +50,14 @@ async function updateProjectFile(path: string, { buildNumber }: { buildNumber: n
   await updateFile(path, (contents) =>
     contents.replace(
       new RegExp(xcodeCurrentVersionPattern, 'g'),
-      `CURRENT_PROJECT_VERSION = ${buildNumber}`
-    )
+      `CURRENT_PROJECT_VERSION = ${buildNumber}`,
+    ),
   );
 }
 
 export async function updateXcodeBuildNumber(
   buildNumber: number,
-  options: XcodeProjectOptions = {}
+  options: XcodeProjectOptions = {},
 ) {
   const infoPlists = options.infoPlists || (await findPlistFiles());
 

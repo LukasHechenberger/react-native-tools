@@ -1,2 +1,8 @@
+# Dependencies
 node_modules
+
+# Build files
 out
+
+# Generated Sources
+.prettierignore
