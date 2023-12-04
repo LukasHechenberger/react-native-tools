@@ -1,5 +1,11 @@
 # react-native-bump
 
+## 0.3.0
+
+### Minor Changes
+
+- 35445f8: Also update fastlane Deliverfiles
+
 ## 0.2.3
 
 ### Patch Changes
