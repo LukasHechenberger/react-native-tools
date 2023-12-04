@@ -10,12 +10,14 @@ import {
   updateXcodeVersion,
   type XcodeProjectOptions,
 } from './xcode';
+import { updateFastlaneVersion, type FastlaneProjectOptions } from './fastlane';
 
-export type CombinedOptions = XcodeProjectOptions & AndroidProjectOptions;
+export type CombinedOptions = XcodeProjectOptions & AndroidProjectOptions & FastlaneProjectOptions;
 
 export async function updateVersion(version: string, options?: CombinedOptions) {
   await updateXcodeVersion(version, options);
   await updateAndroidVersion(version, options);
+  await updateFastlaneVersion(version, options);
 }
 
 export async function updateBuildNumber(buildNumber: number, options?: CombinedOptions) {
