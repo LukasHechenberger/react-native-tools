@@ -6,6 +6,7 @@ export default defineConfig(({ watch }) => ({
   outDir: './out',
   dts: true,
   clean: !watch,
+  minify: !watch,
   outExtension({ format }) {
     return { js: format === 'cjs' ? '.cjs' : '.mjs' };
   },
