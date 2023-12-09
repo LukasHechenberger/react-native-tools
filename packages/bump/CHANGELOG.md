@@ -1,5 +1,11 @@
 # react-native-bump
 
+## 0.3.1
+
+### Patch Changes
+
+- e35910b: Bundle clipanion to fix yarn install warnings
+
 ## 0.3.0
 
 ### Minor Changes
