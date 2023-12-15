@@ -1,5 +1,11 @@
 # react-native-bump
 
+## 0.3.2
+
+### Patch Changes
+
+- d41c7f7: Externalize clipanion again to prevent esm error
+
 ## 0.3.1
 
 ### Patch Changes
