@@ -43,3 +43,4 @@ export async function incrementBuildNumber(options?: CombinedOptions) {
 export * from './xcode';
 export * from './android';
 export * from './changesets';
+export * from './fastlane';
