@@ -1,5 +1,6 @@
 import type { Message, NodeishFilesystemSubset, Pattern, Plugin, Text } from '@inlang/sdk';
-import { id as manifestId, displayName, description } from '../marketplace-manifest.json';
+import { displayName } from '../marketplace-manifest.template.json';
+import { description } from '../package.json';
 import { PluginSettings } from './settings.js';
 
 // NOTE: Taken from @inlang/sdk/test-utilities
