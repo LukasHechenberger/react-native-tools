@@ -13,7 +13,7 @@ async function syncManifests() {
     new URL(path, `https://cdn.jsdelivr.net/npm/${npmManifest.name}@latest/`);
 
   inlangManifest.id = id;
-  inlangManifest.description.en = npmManifest.description;
+  inlangManifest.description = { en: npmManifest.description };
   inlangManifest.keywords = npmManifest.keywords;
   inlangManifest.license = npmManifest.license;
   inlangManifest.module = jsdelivrLink(npmManifest.module);
