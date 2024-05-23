@@ -45,7 +45,7 @@ export const plugin: Plugin<{
   description,
   settingsSchema: PluginSettings,
   loadMessages: async ({ settings, nodeishFs }) => {
-    const { pathPattern, useBaseInternationalization = true } = settings[id] ?? {};
+    const { pathPattern } = settings[id] ?? {};
 
     const messages = [];
 
@@ -63,10 +63,6 @@ export const plugin: Plugin<{
           createMessage(
             key,
             Object.fromEntries([
-              // // Source language
-              // ...(useBaseInternationalization ? [[catalog.sourceLanguage, messageKey]] : []),
-
-              // Translations
               ...Object.entries(localizations).map(([lang, { stringUnit }]) => [
                 lang,
                 stringUnit.value,
@@ -88,7 +84,8 @@ export const plugin: Plugin<{
       for (const message of messages) {
         if (message.id.startsWith(prefix)) {
           const key = message.id.slice(prefix.length);
-          // Reset message for this key
+
+          // Ensure there is an entry for this key
           catalog.strings[key] ??= { localizations: {} };
           catalog.strings[key].localizations ??= {};
 

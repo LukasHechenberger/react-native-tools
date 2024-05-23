@@ -20,11 +20,6 @@ export const PluginSettings = Type.Object({
       PathPattern,
     ),
   ]),
-  useBaseInternationalization: Type.Optional(
-    Type.Boolean({
-      description: 'Use base internationalization',
-    }),
-  ),
 });
 
 export type PluginSettings = Static<typeof PluginSettings>;
