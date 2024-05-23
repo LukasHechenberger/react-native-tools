@@ -7,4 +7,5 @@ export default defineConfig(({ watch }) => ({
   dts: true,
   clean: !watch,
   minify: !watch,
+  platform: 'neutral',
 }));

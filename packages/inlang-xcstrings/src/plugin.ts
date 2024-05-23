@@ -1,7 +1,19 @@
-import type { NodeishFilesystemSubset, Plugin, Text } from '@inlang/sdk';
+import type { Message, NodeishFilesystemSubset, Pattern, Plugin, Text } from '@inlang/sdk';
 import { id as manifestId, displayName, description } from '../marketplace-manifest.json';
-import { createMessage } from '@inlang/sdk/test-utilities';
 import { PluginSettings } from './settings.js';
+
+// NOTE: Taken from @inlang/sdk/test-utilities
+const createMessage = (id: string, patterns: Record<string, Pattern | string>) =>
+  ({
+    id,
+    alias: {},
+    selectors: [],
+    variants: Object.entries(patterns).map(([languageTag, patterns]) => ({
+      languageTag,
+      match: [],
+      pattern: typeof patterns === 'string' ? [{ type: 'Text', value: patterns }] : patterns,
+    })),
+  }) satisfies Message;
 
 type StringsCatalog = {
   sourceLanguage: string;
