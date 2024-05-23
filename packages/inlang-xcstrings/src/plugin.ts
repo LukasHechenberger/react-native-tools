@@ -23,9 +23,7 @@ type StringsCatalog = {
   >;
 };
 
-export const id = 'plugin.lsage.xcstrings';
-
-if (id !== manifestId) throw new Error('Plugin ID does not match');
+export const id = 'plugin.hechenbros.xcstrings';
 
 function* iteratePatterns(file: PluginSettings['file']) {
   const patterns =

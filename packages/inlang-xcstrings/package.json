@@ -18,13 +18,17 @@
   "module": "./out/index.js",
   "types": "./out/index.d.ts",
   "files": [
-    "./out"
+    "./out",
+    "./marketplace-manifest.json",
+    "./CHANGELOG.md"
   ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "inlang:build": "npx @inlang/cli module build --entry ./src/index.ts",
     "inlang:dev": "npx @inlang/cli module build --entry ./src/index.ts --watch",
+    "prepublishOnly": "npm run -s sync-manifest",
+    "sync-manifest": "node ./scripts/sync-manifests.mjs",
     "test": "vitest"
   },
   "devDependencies": {

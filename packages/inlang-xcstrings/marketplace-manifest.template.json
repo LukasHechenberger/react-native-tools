@@ -1,10 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/marketplace-manifest",
-  "id": "plugin.lsage.xcstrings",
   "displayName": {
-    "en": "TODO"
+    "en": "Xcode String Catalogs"
   },
-  "description": {
-    "en": "TODO"
-  }
+  "description": {}
 }
