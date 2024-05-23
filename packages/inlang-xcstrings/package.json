@@ -23,9 +23,12 @@
     "dev": "inlang module build --entry ./src/index.ts --watch",
     "test": "tsc --noEmit && vitest run"
   },
+  "dependencies": {
+    "@inlang/sdk": "^0.34.10",
+    "@sinclair/typebox": "^0.31.28"
+  },
   "devDependencies": {
     "@inlang/cli": "^2.16.8",
-    "@inlang/sdk": "^0.34.10",
     "@lix-js/client": "^1.4.0",
     "typescript": "^5.2.2",
     "vitest": "^1.6.0"

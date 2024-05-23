@@ -1,69 +1,104 @@
-import { it, expect } from 'vitest';
+import { it, expect, describe } from 'vitest';
 import { ProjectSettings, loadProject } from '@inlang/sdk';
 import { id as pluginId } from '../marketplace-manifest.json';
-import { mockRepo } from '@lix-js/client';
+import { createNodeishMemoryFs, mockRepo } from '@lix-js/client';
+import type { PluginSettings } from './settings.js';
+import { createMessage } from '@inlang/sdk/test-utilities';
 
-it('should return fake messages (without aliases) to illustrate how a plugin works', async () => {
-  // creating a virtual filesystem in a mock repo to store the project file
+const projectSettings = {
+  sourceLanguageTag: 'en',
+  modules: ['./plugin.js'],
+  languageTags: ['en', 'de'],
+};
+
+async function setup(pluginSettings: PluginSettings) {
   const repo = await mockRepo();
   const fs = repo.nodeishFs;
 
   // creating a project file
   const settings = {
-    sourceLanguageTag: 'en',
-    modules: ['./plugin.js'],
-    languageTags: ['en', 'de'],
-  } satisfies ProjectSettings;
+    ...projectSettings,
+    [pluginId]: pluginSettings,
+  };
 
   // writing the project file to the virtual filesystem
   await fs.mkdir('/project.inlang', { recursive: true });
   await fs.writeFile('/project.inlang/settings.json', JSON.stringify(settings));
 
-  // opening the project file and loading the plugin
-  const project = await loadProject({
+  return {
     repo,
-    projectPath: '/project.inlang',
-    // simulate the import function that the SDK uses
-    // to inject the plugin into the project
-    _import: async () => import('./index.js'),
+    fs,
+    async loadProject(checkErrors = true) {
+      const project = await loadProject({
+        repo,
+        projectPath: '/project.inlang',
+        // simulate the import function that the SDK uses
+        // to inject the plugin into the project
+        _import: async () => import('./index.js'),
+      });
+
+      if (checkErrors) {
+        expect(project.errors()).toEqual([]);
+        expect(project.installed.plugins()[0]?.id).toBe(pluginId);
+      }
+
+      return project;
+    },
+  };
+}
+
+describe('loadMessage', () => {
+  it('should throw with invalid catalog source language', async () => {
+    const { loadProject, fs } = await setup({ pathPattern: './Localizable.xcstrings' });
+
+    await fs.writeFile(
+      './Localizable.xcstrings',
+      JSON.stringify({
+        sourceLanguage: 'de',
+        strings: {},
+      }),
+    );
+
+    const project = await loadProject(false);
+    const errors = project.errors() as Error[];
+
+    expect(errors[0].message).toMatch(/Source language 'de'/);
   });
 
-  expect(project.errors()).toEqual([]);
+  it('should return messages defined in single pathPattern', async () => {
+    const { loadProject, fs } = await setup({ pathPattern: './Localizable.xcstrings' });
 
-  expect(project.installed.plugins()[0]?.id).toBe(pluginId);
+    await fs.writeFile(
+      './Localizable.xcstrings',
+      JSON.stringify({
+        sourceLanguage: 'en',
+        strings: {
+          MyMessage: {
+            localizations: {
+              de: {
+                stringUnit: {
+                  state: 'translated',
+                  value: 'Karte',
+                },
+              },
+            },
+          },
+        },
+      }),
+    );
 
-  expect(project.query.messages.get({ where: { id: 'this-is-a-test-message' } })).toBeDefined();
+    const project = await loadProject();
+    const allMessages = project.query.messages.getAll();
+
+    expect(allMessages).toMatchObject([{ id: 'MyMessage' }]);
+  });
 });
 
-it('should return fake messages (with aliases) to illustrate how a plugin works', async () => {
-  // creating a virtual filesystem in a mock repo to store the project file
-  const repo = await mockRepo();
-  const fs = repo.nodeishFs;
+describe('saveMessage', () => {
+  it('should save simple messages', () => {
+    const fs = createNodeishMemoryFs();
+    fs.writeFile('./Localizable.xcstrings', JSON.stringify({ sourceLanguage: 'en', strings: {} }));
 
-  // creating a project file
-  const settings = {
-    sourceLanguageTag: 'en',
-    modules: ['./plugin.js'],
-    languageTags: ['en', 'de'],
-    experimental: { aliases: true },
-  } satisfies ProjectSettings;
-
-  // writing the project file to the virtual filesystem
-  await fs.mkdir('/project.inlang', { recursive: true });
-  await fs.writeFile('/project.inlang/settings.json', JSON.stringify(settings));
-
-  // opening the project file and loading the plugin
-  const project = await loadProject({
-    repo,
-    projectPath: '/project.inlang',
-    // simulate the import function that the SDK uses
-    // to inject the plugin into the project
-    _import: async () => import('./index.js'),
+    const messages = [createMessage('MyMessage', { en: 'My Message', de: 'Meine Nachricht' })];
   });
-
-  expect(project.errors()).toEqual([]);
-
-  expect(project.installed.plugins()[0]?.id).toBe(pluginId);
-
-  expect(project.query.messages.get({ where: { id: 'steep_alpaca_drum_intense' } })).toBeDefined();
 });
