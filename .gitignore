@@ -6,3 +6,4 @@ out
 
 # Generated Sources
 .prettierignore
+packages/*/marketplace-manifest.json

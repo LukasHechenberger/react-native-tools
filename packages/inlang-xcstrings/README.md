@@ -1,5 +1,7 @@
 # inlang-plugin-xcstrings
 
+[![badge](https://cdn.jsdelivr.net/gh/opral/monorepo@main/inlang/assets/md-badges/inlang.svg)](https://inlang.com)
+
 > An inlang plugin to handle Xcode String Catalogs
 
 ## Usage

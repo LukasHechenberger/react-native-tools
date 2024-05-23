@@ -1,5 +1,6 @@
 import type { Message, NodeishFilesystemSubset, Pattern, Plugin, Text } from '@inlang/sdk';
-import { id as manifestId, displayName, description } from '../marketplace-manifest.json';
+import { displayName } from '../marketplace-manifest.template.json';
+import { description } from '../package.json';
 import { PluginSettings } from './settings.js';
 
 // NOTE: Taken from @inlang/sdk/test-utilities
@@ -23,9 +24,7 @@ type StringsCatalog = {
   >;
 };
 
-export const id = 'plugin.lsage.xcstrings';
-
-if (id !== manifestId) throw new Error('Plugin ID does not match');
+export const id = 'plugin.hechenbros.xcstrings';
 
 function* iteratePatterns(file: PluginSettings['file']) {
   const patterns =
