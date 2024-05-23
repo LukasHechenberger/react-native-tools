@@ -3,13 +3,12 @@ import { Type, type Static } from '@sinclair/typebox';
 export const PathPattern = Type.String({
   pattern: '^(\\./|\\../|/)[^*]*\\.xcstrings',
   title: 'Path to xcstrings files',
-  description:
-    'Specify the pathPattern to locate language files in your repository. It must end with `.xcstrings`.',
+  description: 'Specify the file to read translations from. It must end with `.xcstrings`.',
   examples: ['./Localizable.xcstrings', './ios/MyApp/Localizable.xcstrings'],
 });
 
 export const PluginSettings = Type.Object({
-  pathPattern: Type.Union([
+  file: Type.Union([
     PathPattern,
     Type.Record(
       Type.String({

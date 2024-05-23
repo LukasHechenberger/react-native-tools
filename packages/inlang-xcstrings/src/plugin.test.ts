@@ -49,7 +49,7 @@ async function setup(pluginSettings: PluginSettings) {
 
 describe('loadMessage', () => {
   it('should throw with invalid catalog source language', async () => {
-    const { loadProject, fs } = await setup({ pathPattern: './Localizable.xcstrings' });
+    const { loadProject, fs } = await setup({ file: './Localizable.xcstrings' });
 
     await fs.writeFile(
       './Localizable.xcstrings',
@@ -65,8 +65,8 @@ describe('loadMessage', () => {
     expect(errors[0].message).toMatch(/Source language 'de'/);
   });
 
-  it('should return messages defined in single pathPattern', async () => {
-    const { loadProject, fs } = await setup({ pathPattern: './Localizable.xcstrings' });
+  it('should return messages defined in single file', async () => {
+    const { loadProject, fs } = await setup({ file: './Localizable.xcstrings' });
 
     await fs.writeFile(
       './Localizable.xcstrings',
@@ -96,7 +96,7 @@ describe('loadMessage', () => {
 
 describe('saveMessage', () => {
   it('should save simple messages', async () => {
-    const { loadProject, fs } = await setup({ pathPattern: './Localizable.xcstrings' });
+    const { loadProject, fs } = await setup({ file: './Localizable.xcstrings' });
 
     fs.writeFile('./Localizable.xcstrings', JSON.stringify({ sourceLanguage: 'en', strings: {} }));
 
@@ -105,7 +105,7 @@ describe('saveMessage', () => {
     const settings = {
       ...projectSettings,
       [pluginId]: {
-        pathPattern: './Localizable.xcstrings',
+        file: './Localizable.xcstrings',
       },
     };
 

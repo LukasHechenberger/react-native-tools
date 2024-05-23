@@ -15,20 +15,17 @@ export const id = 'plugin.lsage.xcstrings';
 
 if (id !== manifestId) throw new Error('Plugin ID does not match');
 
-function* iteratePatterns(pathPattern: PluginSettings['pathPattern']) {
+function* iteratePatterns(file: PluginSettings['file']) {
   const patterns =
-    pathPattern instanceof Object
-      ? Object.entries(pathPattern).map(([key, pattern]) => ({ key, pattern }))
-      : [{ key: undefined, pattern: pathPattern }];
+    file instanceof Object
+      ? Object.entries(file).map(([key, pattern]) => ({ key, pattern }))
+      : [{ key: undefined, pattern: file }];
 
   yield* patterns;
 }
 
-async function* iterateCatalogs(
-  nodeishFs: NodeishFilesystemSubset,
-  pathPattern: PluginSettings['pathPattern'],
-) {
-  for (const { key, pattern } of iteratePatterns(pathPattern)) {
+async function* iterateCatalogs(nodeishFs: NodeishFilesystemSubset, file: PluginSettings['file']) {
+  for (const { key, pattern } of iteratePatterns(file)) {
     const catalog = JSON.parse(
       await nodeishFs.readFile(pattern, { encoding: 'utf-8' }),
     ) as StringsCatalog;
@@ -45,14 +42,14 @@ export const plugin: Plugin<{
   description,
   settingsSchema: PluginSettings,
   loadMessages: async ({ settings, nodeishFs }) => {
-    const { pathPattern } = settings[id] ?? {};
+    const { file } = settings[id] ?? {};
 
     const messages = [];
 
-    for await (const { key: fileKey, catalog } of iterateCatalogs(nodeishFs, pathPattern)) {
+    for await (const { key: fileKey, catalog } of iterateCatalogs(nodeishFs, file)) {
       if (catalog.sourceLanguage !== settings.sourceLanguageTag) {
         throw new Error(
-          `Source language '${catalog.sourceLanguage}' inside ${pathPattern} does not match project settings ('${settings.sourceLanguageTag}')`,
+          `Source language '${catalog.sourceLanguage}' inside ${file} does not match project settings ('${settings.sourceLanguageTag}')`,
         );
       }
 
@@ -76,9 +73,9 @@ export const plugin: Plugin<{
     return messages;
   },
   saveMessages: async ({ messages, settings, nodeishFs }) => {
-    const { pathPattern } = settings[id] ?? {};
+    const { file } = settings[id] ?? {};
 
-    for await (const { key: fileKey, catalog, path } of iterateCatalogs(nodeishFs, pathPattern)) {
+    for await (const { key: fileKey, catalog, path } of iterateCatalogs(nodeishFs, file)) {
       const prefix = fileKey ? `${fileKey}:` : '';
 
       for (const message of messages) {
