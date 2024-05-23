@@ -1,0 +1,43 @@
+{
+  "name": "inlang-plugin-xcstrings",
+  "version": "0.0.0",
+  "description": "An inlang plugin to handle Xcode String Catalogs",
+  "keywords": [
+    "inlang",
+    "plugin",
+    "xcstrings",
+    "xcode",
+    "translation",
+    "ios",
+    "mac"
+  ],
+  "license": "MIT",
+  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
+  "type": "module",
+  "main": "./out/index.cjs",
+  "module": "./out/index.js",
+  "types": "./out/index.d.ts",
+  "files": [
+    "./out"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "inlang:build": "npx @inlang/cli module build --entry ./src/index.ts",
+    "inlang:dev": "npx @inlang/cli module build --entry ./src/index.ts --watch",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "^0.31.28"
+  },
+  "devDependencies": {
+    "@inlang/sdk": "^0.34.10",
+    "@lix-js/client": "^1.4.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.2.2",
+    "vitest": "^1.6.0"
+  },
+  "peerDependencies": {
+    "@inlang/sdk": "^0.34.10"
+  }
+}

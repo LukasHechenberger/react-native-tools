@@ -1,0 +1,10 @@
+{
+  "$schema": "https://inlang.com/schema/marketplace-manifest",
+  "id": "plugin.lsage.xcstrings",
+  "displayName": {
+    "en": "TODO"
+  },
+  "description": {
+    "en": "TODO"
+  }
+}
