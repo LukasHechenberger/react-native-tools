@@ -1,9 +1,9 @@
 import { it, expect, describe } from 'vitest';
 import { ProjectSettings, loadProject } from '@inlang/sdk';
-import { id as pluginId } from '../marketplace-manifest.json';
 import { createNodeishMemoryFs, mockRepo } from '@lix-js/client';
 import type { PluginSettings } from './settings.js';
 import { createMessage } from '@inlang/sdk/test-utilities';
+import { id as pluginId, plugin } from './plugin.js';
 
 const projectSettings = {
   sourceLanguageTag: 'en',
@@ -95,10 +95,33 @@ describe('loadMessage', () => {
 });
 
 describe('saveMessage', () => {
-  it('should save simple messages', () => {
-    const fs = createNodeishMemoryFs();
+  it('should save simple messages', async () => {
+    const { loadProject, fs } = await setup({ pathPattern: './Localizable.xcstrings' });
+
     fs.writeFile('./Localizable.xcstrings', JSON.stringify({ sourceLanguage: 'en', strings: {} }));
 
     const messages = [createMessage('MyMessage', { en: 'My Message', de: 'Meine Nachricht' })];
+
+    const settings = {
+      ...projectSettings,
+      [pluginId]: {
+        pathPattern: './Localizable.xcstrings',
+      },
+    };
+
+    await plugin.saveMessages!({ messages, nodeishFs: fs, settings });
+
+    const project = await loadProject();
+    const allMessages = project.query.messages.getAll();
+
+    expect(allMessages).toMatchObject([
+      {
+        id: 'MyMessage',
+        variants: [
+          { languageTag: 'de', pattern: [{ type: 'Text', value: 'Meine Nachricht' }] },
+          { languageTag: 'en', pattern: [{ type: 'Text', value: 'My Message' }] },
+        ],
+      },
+    ]);
   });
 });
