@@ -45,6 +45,8 @@ async function* iterateCatalogs(nodeishFs: NodeishFilesystemSubset, file: Plugin
   }
 }
 
+const usingBasePostfix = ' [using base]';
+
 export const plugin: Plugin<{
   [id]: PluginSettings;
 }> = {
@@ -54,6 +56,9 @@ export const plugin: Plugin<{
   settingsSchema: PluginSettings,
   loadMessages: async ({ settings, nodeishFs }) => {
     const { file } = settings[id] ?? {};
+
+    // NOTE: This should not happen as long as the settings schema is validated before...
+    if (!file) throw new Error(`Missing 'file' property in settings for plugin ${id}`);
 
     const messages = [];
 
@@ -71,6 +76,10 @@ export const plugin: Plugin<{
           createMessage(
             key,
             Object.fromEntries([
+              // Add base localization
+              [settings.sourceLanguageTag, `${messageKey}${usingBasePostfix}`],
+
+              // Actual translations
               ...Object.entries(localizations).map(([lang, { stringUnit }]) => [
                 lang,
                 stringUnit.value,
@@ -98,6 +107,16 @@ export const plugin: Plugin<{
           catalog.strings[key].localizations ??= {};
 
           for (const variant of message.variants) {
+            const value = (variant.pattern as Text[]).map((text) => text.value).join('');
+
+            if (
+              variant.languageTag === settings.sourceLanguageTag &&
+              value === `${key}${usingBasePostfix}`
+            ) {
+              console.log(`Skipping base localization for ${key}`);
+              continue;
+            }
+
             catalog.strings[key].localizations[variant.languageTag] = {
               stringUnit: {
                 state: 'translated',
