@@ -2,6 +2,7 @@ import type { Message, NodeishFilesystemSubset, Pattern, Plugin, Text } from '@i
 import { displayName } from '../marketplace-manifest.template.json';
 import { description } from '../package.json';
 import { PluginSettings } from './settings.js';
+import { readJson } from './lib/fs.js';
 
 // NOTE: Taken from @inlang/sdk/test-utilities
 const createMessage = (id: string, patterns: Record<string, Pattern | string>) =>
@@ -16,7 +17,7 @@ const createMessage = (id: string, patterns: Record<string, Pattern | string>) =
     })),
   }) satisfies Message;
 
-type StringsCatalog = {
+export type StringsCatalog = {
   sourceLanguage: string;
   strings: Record<
     string,
@@ -37,13 +38,13 @@ function* iteratePatterns(file: PluginSettings['file']) {
 
 async function* iterateCatalogs(nodeishFs: NodeishFilesystemSubset, file: PluginSettings['file']) {
   for (const { key, pattern } of iteratePatterns(file)) {
-    const catalog = JSON.parse(
-      await nodeishFs.readFile(pattern, { encoding: 'utf-8' }),
-    ) as StringsCatalog;
+    const catalog = await readJson<StringsCatalog>(pattern, nodeishFs);
 
     yield { key, pattern, catalog, path: pattern };
   }
 }
+
+export const usingBasePostfix = ' [using base]';
 
 export const plugin: Plugin<{
   [id]: PluginSettings;
@@ -54,6 +55,9 @@ export const plugin: Plugin<{
   settingsSchema: PluginSettings,
   loadMessages: async ({ settings, nodeishFs }) => {
     const { file } = settings[id] ?? {};
+
+    // NOTE: This should not happen as long as the settings schema is validated before...
+    if (!file) throw new Error(`Missing 'file' property in settings for plugin ${id}`);
 
     const messages = [];
 
@@ -71,6 +75,10 @@ export const plugin: Plugin<{
           createMessage(
             key,
             Object.fromEntries([
+              // Add base localization
+              [settings.sourceLanguageTag, `${messageKey}${usingBasePostfix}`],
+
+              // Actual translations
               ...Object.entries(localizations).map(([lang, { stringUnit }]) => [
                 lang,
                 stringUnit.value,
@@ -98,6 +106,16 @@ export const plugin: Plugin<{
           catalog.strings[key].localizations ??= {};
 
           for (const variant of message.variants) {
+            const value = (variant.pattern as Text[]).map((text) => text.value).join('');
+
+            if (
+              variant.languageTag === settings.sourceLanguageTag &&
+              value === `${key}${usingBasePostfix}`
+            ) {
+              console.log(`Skipping base localization for ${key}`);
+              continue;
+            }
+
             catalog.strings[key].localizations[variant.languageTag] = {
               stringUnit: {
                 state: 'translated',

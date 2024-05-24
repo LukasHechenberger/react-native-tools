@@ -1,9 +1,10 @@
-import { it, expect, describe } from 'vitest';
-import { ProjectSettings, loadProject } from '@inlang/sdk';
-import { createNodeishMemoryFs, mockRepo } from '@lix-js/client';
-import type { PluginSettings } from './settings.js';
+import { loadProject } from '@inlang/sdk';
 import { createMessage } from '@inlang/sdk/test-utilities';
-import { id as pluginId, plugin } from './plugin.js';
+import { mockRepo } from '@lix-js/client';
+import { describe, expect, it } from 'vitest';
+import { readJson } from './lib/fs.js';
+import { plugin, id as pluginId, usingBasePostfix, type StringsCatalog } from './plugin.js';
+import type { PluginSettings } from './settings.js';
 
 const projectSettings = {
   sourceLanguageTag: 'en',
@@ -92,6 +93,36 @@ describe('loadMessage', () => {
 
     expect(allMessages).toMatchObject([{ id: 'MyMessage' }]);
   });
+
+  it('should inherit base translations', async () => {
+    const { loadProject, fs } = await setup({ file: './Localizable.xcstrings' });
+
+    await fs.writeFile(
+      './Localizable.xcstrings',
+      JSON.stringify({
+        sourceLanguage: 'en',
+        strings: {
+          MyMessage: {
+            localizations: {
+              de: {
+                stringUnit: {
+                  state: 'translated',
+                  value: 'Karte',
+                },
+              },
+            },
+          },
+        },
+      }),
+    );
+
+    const project = await loadProject();
+    const allMessages = project.query.messages.getAll();
+
+    expect(allMessages).toMatchObject([
+      createMessage('MyMessage', { de: 'Karte', en: `MyMessage${usingBasePostfix}` }),
+    ]);
+  });
 });
 
 describe('saveMessage', () => {
@@ -111,6 +142,29 @@ describe('saveMessage', () => {
 
     await plugin.saveMessages!({ messages, nodeishFs: fs, settings });
 
+    const contents = await readJson<StringsCatalog>('./Localizable.xcstrings', fs);
+    expect(contents).toMatchObject({
+      sourceLanguage: 'en',
+      strings: {
+        MyMessage: {
+          localizations: {
+            de: {
+              stringUnit: {
+                state: 'translated',
+                value: 'Meine Nachricht',
+              },
+            },
+            en: {
+              stringUnit: {
+                state: 'translated',
+                value: 'My Message',
+              },
+            },
+          },
+        },
+      },
+    });
+
     const project = await loadProject();
     const allMessages = project.query.messages.getAll();
 
@@ -123,5 +177,46 @@ describe('saveMessage', () => {
         ],
       },
     ]);
+  });
+
+  it('should ignore unchanged base translations', async () => {
+    const { loadProject, fs } = await setup({ file: './Localizable.xcstrings' });
+
+    fs.writeFile('./Localizable.xcstrings', JSON.stringify({ sourceLanguage: 'en', strings: {} }));
+
+    const messages = [
+      createMessage('My Message', { de: 'Meine Nachricht', en: `My Message${usingBasePostfix}` }),
+    ];
+
+    const settings = {
+      ...projectSettings,
+      [pluginId]: {
+        file: './Localizable.xcstrings',
+      },
+    };
+
+    await plugin.saveMessages!({ messages, nodeishFs: fs, settings });
+
+    const contents = await readJson<StringsCatalog>('./Localizable.xcstrings', fs);
+    expect(contents).toMatchObject({
+      sourceLanguage: 'en',
+      strings: {
+        'My Message': {
+          localizations: {
+            de: {
+              stringUnit: {
+                state: 'translated',
+                value: 'Meine Nachricht',
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const project = await loadProject();
+    const allMessages = project.query.messages.getAll();
+
+    expect(allMessages).toMatchObject(messages);
   });
 });

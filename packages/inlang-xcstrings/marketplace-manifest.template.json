@@ -2,5 +2,6 @@
   "$schema": "https://inlang.com/schema/marketplace-manifest",
   "displayName": {
     "en": "Xcode String Catalogs"
-  }
+  },
+  "publisherIcon": "https://hechenbros.com/favicon.png"
 }

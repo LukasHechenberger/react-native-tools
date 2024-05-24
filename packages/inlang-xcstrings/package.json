@@ -12,7 +12,7 @@
     "mac"
   ],
   "license": "MIT",
-  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
+  "author": "Hechenbros <npm@hechenbros.com> (https://hechenbros.com)",
   "type": "module",
   "main": "./out/index.cjs",
   "module": "./out/index.js",
