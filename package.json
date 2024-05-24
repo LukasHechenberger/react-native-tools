@@ -4,7 +4,7 @@
   "private": true,
   "description": "React Native Tools",
   "license": "MIT",
-  "author": "Hechenbros <npm@ls-age.com> (https://ls-age.com/)",
+  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "scripts": {
     "format": "prettier .",
     "postinstall": "echo \"$(cat .gitignore)\npnpm-lock.yaml\" > .prettierignore",
