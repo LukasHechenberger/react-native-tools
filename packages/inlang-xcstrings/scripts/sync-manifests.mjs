@@ -18,7 +18,7 @@ async function syncManifests() {
   inlangManifest.license = npmManifest.license;
   inlangManifest.module = jsdelivrLink(npmManifest.module);
   inlangManifest.readme = jsdelivrLink('README.md');
-  inlangManifest.publisherName = 'Hechenbros';
+  inlangManifest.publisherName = npmManifest.author.split('<')[0].trim();
 
   await writeFile('./marketplace-manifest.json', `${JSON.stringify(inlangManifest, null, 2)}\n`);
 }
