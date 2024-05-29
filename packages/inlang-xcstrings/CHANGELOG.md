@@ -1,5 +1,11 @@
 # inlang-plugin-xcstrings
 
+## 0.1.1
+
+### Patch Changes
+
+- 81a7b64: Add pages to inlang marketplace manifest
+
 ## 0.1.0
 
 ### Minor Changes
