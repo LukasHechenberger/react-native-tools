@@ -20,7 +20,7 @@ Add the plugin and your settings to your _inlang.project/settings.json_:
      "https://cdn.jsdelivr.net/npm/@inlang/plugin-t-function-matcher@latest/dist/index.js",
 +    "https://cdn.jsdelivr.net/npm/inlang-plugin-xcstrings@latest/out/index.js"
    ],
-+  "plugin.lsage.xcstrings": {
++  "plugin.hechenbros.xcstrings": {
 +    "pathPattern": "./Localizable.xcstrings"
 +  }
  }
