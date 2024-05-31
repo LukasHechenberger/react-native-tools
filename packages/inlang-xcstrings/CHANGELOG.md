@@ -1,5 +1,11 @@
 # inlang-plugin-xcstrings
 
+## 0.1.3
+
+### Patch Changes
+
+- bd9387b: Fix typo in docs
+
 ## 0.1.2
 
 ### Patch Changes

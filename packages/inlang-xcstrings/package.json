@@ -1,6 +1,6 @@
 {
   "name": "inlang-plugin-xcstrings",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "An inlang plugin to handle Xcode String Catalogs",
   "keywords": [
     "inlang",
