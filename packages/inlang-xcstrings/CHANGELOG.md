@@ -1,5 +1,11 @@
 # inlang-plugin-xcstrings
 
+## 0.1.2
+
+### Patch Changes
+
+- 9f1bc26: Update inlang marketplace manifest
+
 ## 0.1.1
 
 ### Patch Changes
