@@ -11,8 +11,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    permissions:
-      attestations: write
+    permissions: write-all
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
