@@ -3,5 +3,6 @@
   "displayName": {
     "en": "Xcode String Catalogs"
   },
-  "publisherIcon": "https://hechenbros.com/favicon.png"
+  "publisherIcon": "https://hechenbros.com/favicon.png",
+  "publisherLink": "https://hechenbros.com"
 }
