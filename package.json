@@ -15,7 +15,7 @@
     "update-readme": "node ./scripts/update-readme.mjs"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.2",
+    "@changesets/cli": "^2.27.7",
     "@ls-age/update-section": "^0.5.0",
     "@manypkg/get-packages": "^2.2.2",
     "prettier": "^3.1.0",
