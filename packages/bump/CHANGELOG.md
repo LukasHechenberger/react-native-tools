@@ -1,5 +1,11 @@
 # react-native-bump
 
+## 0.4.0
+
+### Minor Changes
+
+- c85ba70: Use `changesets-preview` to detect next release version
+
 ## 0.3.3
 
 ### Patch Changes
