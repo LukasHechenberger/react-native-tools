@@ -17,8 +17,6 @@
     "update-readme": "node ./scripts/update-readme.mjs"
   },
   "dependencies": {
-    "@changesets/get-release-plan": "^4.0.3",
-    "@changesets/types": "^6.0.0",
     "@manypkg/get-packages": "^2.2.2",
     "clipanion": "4.0.0-rc.2",
     "typanion": "^3.14.0"
@@ -28,5 +26,9 @@
     "@types/node": "^20.9.1",
     "tsup": "^8.0.1",
     "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "@changesets/get-release-plan": "^4.0.3",
+    "@changesets/types": "^6.0.0"
   }
 }
