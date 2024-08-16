@@ -38,5 +38,8 @@
   "peerDependencies": {
     "@changesets/get-release-plan": "^4.0.3",
     "@changesets/types": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
