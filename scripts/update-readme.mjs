@@ -8,10 +8,10 @@ async function updateReadme() {
     'README.md',
     'packages',
     packages
+      .sort((a, b) => a.packageJson.name.localeCompare(b.packageJson.name))
       .map(
         ({ packageJson, relativeDir }) =>
-          `- [\`${packageJson.name}\`](${relativeDir}): [![NPM Version](https://img.shields.io/npm/v/${packageJson.name})](https://www.npmjs.com/package/${packageJson.name})
- ${packageJson.description}`,
+          `- [\`${packageJson.name}\`](${relativeDir}): [![NPM Version](https://img.shields.io/npm/v/${packageJson.name})](https://www.npmjs.com/package/${packageJson.name}) ${packageJson.description}`,
       )
       .join('\n'),
   );

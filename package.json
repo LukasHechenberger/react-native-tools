@@ -3,6 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "description": "React Native Tools",
+  "homepage": "https://github.com/LukasHechenberger/react-native-tools#readme",
+  "bugs": {
+    "url": "https://github.com/LukasHechenberger/react-native-tools/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukasHechenberger/react-native-tools.git"
+  },
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "scripts": {
@@ -11,7 +19,8 @@
     "format": "prettier .",
     "postinstall": "echo \"$(cat .gitignore)\npnpm-lock.yaml\" > .prettierignore",
     "release": "pnpm run build && changeset publish",
-    "test": "pnpm update-readme && git diff --exit-code README.md",
+    "sync-metadata": "node ./scripts/sync-metadata.mjs",
+    "test": "pnpm update-readme && pnpm sync-metadata && git diff --exit-code",
     "update-readme": "node ./scripts/update-readme.mjs"
   },
   "devDependencies": {
