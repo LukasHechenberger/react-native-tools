@@ -20,16 +20,19 @@
     "postinstall": "echo \"$(cat .gitignore)\npnpm-lock.yaml\" > .prettierignore",
     "release": "pnpm run build && changeset publish",
     "sync-metadata": "node ./scripts/sync-metadata.mjs",
-    "test": "pnpm update-readme && pnpm sync-metadata && git diff --exit-code",
+    "test": "pnpm test:generated-files && pnpm test:pkg-ok",
+    "test:generated-files": "pnpm update-readme && pnpm sync-metadata && git diff --exit-code",
+    "test:pkg-ok": "pnpm -r --parallel --no-reporter-hide-prefix exec pkg-ok",
     "update-readme": "node ./scripts/update-readme.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
     "@ls-age/update-section": "^0.5.0",
     "@manypkg/get-packages": "^2.2.2",
+    "pkg-ok": "^3.0.0",
     "prettier": "^3.1.0",
     "prettier-plugin-packagejson": "^2.4.7",
     "turbo": "^2.0.14"
   },
-  "packageManager": "pnpm@8.10.2"
+  "packageManager": "pnpm@9.7.1"
 }
