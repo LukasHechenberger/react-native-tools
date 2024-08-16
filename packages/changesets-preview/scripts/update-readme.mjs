@@ -6,7 +6,7 @@ async function updateReadme() {
     'README.md',
     'cli-usage',
     `\`\`\`
-${execSync(`NO_COLOR=1 node out/bin.mjs --help`, { env: { NO_COLOR: '1' } })
+${execSync(`node out/bin.mjs --help`, { env: { NO_COLOR: '1' } })
   .toString()
   .trim()}
 \`\`\``,
