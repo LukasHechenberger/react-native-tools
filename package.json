@@ -10,10 +10,14 @@
     "dev": "turbo dev",
     "format": "prettier .",
     "postinstall": "echo \"$(cat .gitignore)\npnpm-lock.yaml\" > .prettierignore",
-    "release": "pnpm run build && changeset publish"
+    "release": "pnpm run build && changeset publish",
+    "test": "pnpm update-readme && git diff --exit-code README.md",
+    "update-readme": "node ./scripts/update-readme.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
+    "@ls-age/update-section": "^0.5.0",
+    "@manypkg/get-packages": "^2.2.2",
     "prettier": "^3.1.0",
     "prettier-plugin-packagejson": "^2.4.7",
     "turbo": "^2.0.14"
