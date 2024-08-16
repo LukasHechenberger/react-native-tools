@@ -10,6 +10,15 @@
     "release",
     "status"
   ],
+  "homepage": "https://github.com/LukasHechenberger/react-native-tools/tree/main/packages/changesets-preview#readme",
+  "bugs": {
+    "url": "https://github.com/LukasHechenberger/react-native-tools/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukasHechenberger/react-native-tools.git",
+    "directory": "packages/changesets-preview"
+  },
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "main": "./out/index.cjs",

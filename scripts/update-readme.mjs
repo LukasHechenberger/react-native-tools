@@ -1,5 +1,6 @@
 import Template from '@ls-age/update-section';
 import { getPackages } from '@manypkg/get-packages';
+import { markdownTable } from 'markdown-table';
 
 async function updateReadme() {
   const { packages } = await getPackages(process.cwd());
@@ -7,13 +8,16 @@ async function updateReadme() {
   await Template.updateSection(
     'README.md',
     'packages',
-    packages
-      .map(
-        ({ packageJson, relativeDir }) =>
-          `- [\`${packageJson.name}\`](${relativeDir}): [![NPM Version](https://img.shields.io/npm/v/${packageJson.name})](https://www.npmjs.com/package/${packageJson.name})
- ${packageJson.description}`,
-      )
-      .join('\n'),
+    markdownTable([
+      ['Package', 'Description', 'Links'],
+      ...packages
+        .sort((a, b) => a.packageJson.name.localeCompare(b.packageJson.name))
+        .map(({ packageJson, relativeDir }) => [
+          `[\`${packageJson.name}\`](${relativeDir})`,
+          packageJson.description,
+          `[![NPM Version](https://img.shields.io/npm/v/${packageJson.name})](https://www.npmjs.com/package/${packageJson.name})`,
+        ]),
+    ]),
   );
 }
 

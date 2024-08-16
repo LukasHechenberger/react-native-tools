@@ -11,6 +11,15 @@
     "ios",
     "mac"
   ],
+  "homepage": "https://github.com/LukasHechenberger/react-native-tools/tree/main/packages/inlang-xcstrings#readme",
+  "bugs": {
+    "url": "https://github.com/LukasHechenberger/react-native-tools/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukasHechenberger/react-native-tools.git",
+    "directory": "packages/inlang-xcstrings"
+  },
   "license": "MIT",
   "author": "Hechenbros <npm@hechenbros.com> (https://hechenbros.com)",
   "type": "module",
