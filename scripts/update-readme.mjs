@@ -10,7 +10,7 @@ async function updateReadme() {
     packages
       .map(
         ({ packageJson, relativeDir }) =>
-          `- [\`${packageJson.name}\`](${relativeDir}): ![NPM Version](https://img.shields.io/npm/v/${packageJson.name})
+          `- [\`${packageJson.name}\`](${relativeDir}): [![NPM Version](https://img.shields.io/npm/v/${packageJson.name})](https://www.npmjs.com/package/${packageJson.name})
  ${packageJson.description}`,
       )
       .join('\n'),
