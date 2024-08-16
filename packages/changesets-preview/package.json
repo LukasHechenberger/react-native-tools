@@ -2,6 +2,14 @@
   "name": "changesets-preview",
   "version": "0.0.0",
   "description": "Preview releases in a changesets project",
+  "keywords": [
+    "changesets",
+    "preview",
+    "next",
+    "version",
+    "release",
+    "status"
+  ],
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "main": "./out/index.cjs",
