@@ -1,0 +1,42 @@
+{
+  "name": "changesets-preview",
+  "version": "0.0.0",
+  "description": "Preview releases in a changesets project",
+  "keywords": [
+    "changesets",
+    "preview",
+    "next",
+    "version",
+    "release",
+    "status"
+  ],
+  "license": "MIT",
+  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
+  "main": "./out/index.cjs",
+  "module": "./out/index.mjs",
+  "types": "./out/index.d.ts",
+  "bin": {
+    "changesets-preview": "./out/bin.mjs"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "node ./out/bin.mjs --help",
+    "update-readme": "node ./scripts/update-readme.mjs"
+  },
+  "dependencies": {
+    "@manypkg/get-packages": "^2.2.2",
+    "clipanion": "4.0.0-rc.2",
+    "typanion": "^3.14.0"
+  },
+  "devDependencies": {
+    "@ls-age/update-section": "^0.5.0",
+    "@types/node": "^20.9.1",
+    "tsup": "^8.0.1",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "@changesets/get-release-plan": "^4.0.3",
+    "@changesets/types": "^6.0.0"
+  }
+}

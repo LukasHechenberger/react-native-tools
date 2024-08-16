@@ -6,15 +6,21 @@
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
     "format": "prettier .",
     "postinstall": "echo \"$(cat .gitignore)\npnpm-lock.yaml\" > .prettierignore",
-    "release": "pnpm run -r build && changeset publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "release": "pnpm run build && changeset publish",
+    "test": "pnpm update-readme && git diff --exit-code README.md",
+    "update-readme": "node ./scripts/update-readme.mjs"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.2",
+    "@changesets/cli": "^2.27.7",
+    "@ls-age/update-section": "^0.5.0",
+    "@manypkg/get-packages": "^2.2.2",
     "prettier": "^3.1.0",
-    "prettier-plugin-packagejson": "^2.4.7"
+    "prettier-plugin-packagejson": "^2.4.7",
+    "turbo": "^2.0.14"
   },
   "packageManager": "pnpm@8.10.2"
 }

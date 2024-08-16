@@ -2,7 +2,14 @@
   "name": "react-native-bump",
   "version": "0.3.3",
   "description": "Update the version of your React Native app",
-  "keywords": [],
+  "keywords": [
+    "react-native",
+    "bump",
+    "version",
+    "update",
+    "build-number",
+    "changesets"
+  ],
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "main": "./out/index.cjs",
@@ -17,6 +24,7 @@
     "test": "node ./out/bin.mjs --help"
   },
   "dependencies": {
+    "changesets-preview": "workspace:*",
     "clipanion": "4.0.0-rc.2",
     "execa": "^8.0.1",
     "fast-glob": "^3.3.2",

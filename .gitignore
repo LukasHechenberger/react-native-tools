@@ -3,6 +3,7 @@ node_modules
 
 # Build files
 out
+.turbo
 
 # Generated Sources
 .prettierignore
