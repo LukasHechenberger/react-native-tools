@@ -1,36 +1,32 @@
 {
-  "name": "react-native-bump",
-  "version": "0.3.3",
-  "description": "Update the version of your React Native app",
-  "keywords": [],
+  "name": "changesets-preview",
+  "version": "0.0.0",
+  "description": "Preview releases in a changesets project",
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "main": "./out/index.cjs",
   "module": "./out/index.mjs",
   "types": "./out/index.d.ts",
   "bin": {
-    "react-native-bump": "./out/bin.mjs"
+    "changesets-preview": "./out/bin.mjs"
   },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "test": "node ./out/bin.mjs --help"
+    "test": "node ./out/bin.mjs --help",
+    "update-readme": "node ./scripts/update-readme.mjs"
   },
   "dependencies": {
-    "changesets-preview": "workspace:*",
+    "@changesets/get-release-plan": "^4.0.3",
+    "@changesets/types": "^6.0.0",
+    "@manypkg/get-packages": "^2.2.2",
     "clipanion": "4.0.0-rc.2",
-    "execa": "^8.0.1",
-    "fast-glob": "^3.3.2",
-    "plist": "^3.1.0",
     "typanion": "^3.14.0"
   },
   "devDependencies": {
+    "@ls-age/update-section": "^0.5.0",
     "@types/node": "^20.9.1",
-    "@types/plist": "^3.0.5",
     "tsup": "^8.0.1",
     "typescript": "^5.2.2"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

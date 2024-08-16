@@ -1,5 +1,5 @@
 import { Command, Option, UsageError } from 'clipanion';
-import { getNextVersion, incrementBuildNumber, updateVersion } from '../..';
+import { incrementBuildNumber, updateVersion, getNextVersion } from '../..';
 
 export default class VersionCommand extends Command {
   static paths = [['version'], ['update-version']];
